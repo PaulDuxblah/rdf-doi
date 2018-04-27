@@ -12,7 +12,7 @@ class RdfController < ApplicationController
 
   def index
     if params['path']
-      @doi = params['path']
+      @doi = params['path'].strip!
 
       case params['vocab']
         when 'dc'
@@ -20,6 +20,8 @@ class RdfController < ApplicationController
         when 'viaf'
           @data = loadVIAF(@doi)
       end
+
+      @data = loadDC(@doi)
     end
   end
 

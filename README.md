@@ -1,24 +1,27 @@
-# README
+# Ruby RDF application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application shows you data from RDF sites.
 
-Things you may want to cover:
+Enter a DOI code from www.dx.doi.org (ex: 147126.147133) and submit it to fetch datas from it. 
 
-* Ruby version
+## Config
 
-* System dependencies
+This application uses Docker, Ruby 2.4.4, Rails 5.2.50. 
 
-* Configuration
+The Gems used are rdf and linkeddata.
 
-* Database creation
+## Install
 
-* Database initialization
+First of all, you must [install Docker](https://docs.docker.com/install/) on your machine.
 
-* How to run the test suite
+Now, open your terminal , clone the repository and go into it.
 
-* Services (job queues, cache servers, search engines, etc.)
+Enter `docker-compose build` to generate the container. 
 
-* Deployment instructions
+Then, enter `docker-compose up -d` to launch the container. 
 
-* ...
+Now you can go to `localhost:3030` to use the application. 
+
+## Author
+
+Made by Paul Girardin <paulgirardin@hotmail.fr> for the ECV Digital
