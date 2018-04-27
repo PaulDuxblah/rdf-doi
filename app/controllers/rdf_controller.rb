@@ -11,7 +11,7 @@ class RdfController < ApplicationController
 
   def index
     if params['path']
-      @doi = params['path']
+      @doi = params['path'].strip!
       @data = loadDC(@doi)
     end
   end
@@ -34,22 +34,6 @@ class RdfController < ApplicationController
   end
 
   def getDoiUrl(doi)
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts DOI_BASE_URL
-    puts doi
     DOI_BASE_URL + doi
   end
 
