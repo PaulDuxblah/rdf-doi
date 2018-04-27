@@ -5,6 +5,7 @@ require 'linkeddata'
 
 class RdfController < ApplicationController
   DOI_BASE_URL = 'http://dx.doi.org/'
+  VIAF_BASE_URL = 'http://viaf.org/viaf/'
 
   DC = RDF::Vocab::DC
   FOAF = RDF::Vocab::FOAF
@@ -12,7 +13,13 @@ class RdfController < ApplicationController
   def index
     if params['path']
       @doi = params['path']
-      @data = loadDC(@doi)
+
+      case params['vocab']
+        when 'dc'
+          @data = loadDC(@doi)
+        when 'viaf'
+          @data = loadVIAF(@doi)
+      end
     end
   end
 
@@ -34,23 +41,11 @@ class RdfController < ApplicationController
   end
 
   def getDoiUrl(doi)
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts 'mario'
-    puts DOI_BASE_URL
-    puts doi
     DOI_BASE_URL + doi
+  end
+
+  def getViafUrl(doi)
+    VIAF_BASE_URL + doi
   end
 
   def loadDC(doi)
@@ -96,6 +91,27 @@ class RdfController < ApplicationController
     makerQuery.execute(graph) do |solution|
       data[:makers].push(solution.name)
     end
+
+    data
+  end
+
+  def loadVIAF(doi)
+    graph = getGraph(getViafUrl(doi))
+
+    if !graph
+      redirect_to "/"
+      return
+    end
+    
+    data = getEmptyData()
+    data[:url] = getViafUrl(doi)
+
+    # query = RDF::Query.new({
+    #   data: {
+    #     DC.publisher => :publisher,
+    #     DC.date => :date
+    #   }
+    # })
 
     data
   end
