@@ -1,0 +1,60 @@
+<http://id.crossref.org/contributor/jean-francois-groff-1xi0nd3v7f6b>
+      a       <http://xmlns.com/foaf/0.1/Person> ;
+      <http://xmlns.com/foaf/0.1/familyName>
+              "Groff" ;
+      <http://xmlns.com/foaf/0.1/givenName>
+              "Jean-Francois" ;
+      <http://xmlns.com/foaf/0.1/name>
+              "Jean-Francois Groff" .
+
+<http://dx.doi.org/10.1145/147126.147133>
+      <http://prismstandard.org/namespaces/basic/2.1/doi>
+              "10.1145/147126.147133" ;
+      <http://prismstandard.org/namespaces/basic/2.1/endingPage>
+              "40" ;
+      <http://prismstandard.org/namespaces/basic/2.1/startingPage>
+              "37" ;
+      <http://prismstandard.org/namespaces/basic/2.1/volume>
+              "12" ;
+      <http://purl.org/dc/terms/creator>
+              <http://id.crossref.org/contributor/jean-francois-groff-1xi0nd3v7f6b> , <http://id.crossref.org/contributor/tim-berners-lee-1xi0nd3v7f6b> ;
+      <http://purl.org/dc/terms/date>
+              "1992-09-01"^^<http://www.w3.org/2001/XMLSchema#date> ;
+      <http://purl.org/dc/terms/identifier>
+              "10.1145/147126.147133" ;
+      <http://purl.org/dc/terms/isPartOf>
+              <http://id.crossref.org/issn/0163-5697> ;
+      <http://purl.org/dc/terms/publisher>
+              "Association for Computing Machinery (ACM)" ;
+      <http://purl.org/dc/terms/title>
+              "WWW" ;
+      <http://purl.org/ontology/bibo/doi>
+              "10.1145/147126.147133" ;
+      <http://purl.org/ontology/bibo/pageEnd>
+              "40" ;
+      <http://purl.org/ontology/bibo/pageStart>
+              "37" ;
+      <http://purl.org/ontology/bibo/volume>
+              "12" ;
+      <http://www.w3.org/2002/07/owl#sameAs>
+              <doi:10.1145/147126.147133> , <info:doi/10.1145/147126.147133> .
+
+<http://id.crossref.org/issn/0163-5697>
+      a       <http://purl.org/ontology/bibo/Journal> ;
+      <http://prismstandard.org/namespaces/basic/2.1/issn>
+              "0163-5697" ;
+      <http://purl.org/dc/terms/title>
+              "ACM SIGBIO Newsletter" ;
+      <http://purl.org/ontology/bibo/issn>
+              "0163-5697" ;
+      <http://www.w3.org/2002/07/owl#sameAs>
+              "urn:issn:0163-5697" .
+
+<http://id.crossref.org/contributor/tim-berners-lee-1xi0nd3v7f6b>
+      a       <http://xmlns.com/foaf/0.1/Person> ;
+      <http://xmlns.com/foaf/0.1/familyName>
+              "Berners-Lee" ;
+      <http://xmlns.com/foaf/0.1/givenName>
+              "Tim" ;
+      <http://xmlns.com/foaf/0.1/name>
+              "Tim Berners-Lee" .
