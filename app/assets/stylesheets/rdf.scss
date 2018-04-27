@@ -1,0 +1,55 @@
+body {
+  width: 800px;
+  margin: auto;
+
+  form {
+    margin: 20px auto 40px auto;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+
+    border: 1px solid black;
+
+    div {
+      margin-right: 20px;
+    }
+
+    input[type='submit'] {
+      margin-left: auto;
+      padding: 5px 40px;
+    }
+  }
+
+  .result {
+    text-align: center;
+    border: 1px solid black;
+    padding: 10px 0 30px 0;
+
+    h1, h2, h3 {
+      font-weight: normal;
+    }
+
+    .list-title {
+      padding: 0;
+      margin: 0;
+    }
+
+    .answer {
+      background-color: #C0C0C0;
+      padding: 4px;
+      border-radius: 4px;
+    }
+
+    ul {
+      padding: 0;
+      margin: 0;
+
+      li {
+        list-style: none;
+        display: inline-block;
+        max-width:50%;
+        word-break:break-all;
+      }
+    }
+  }
+}

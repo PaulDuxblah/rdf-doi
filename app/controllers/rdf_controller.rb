@@ -5,23 +5,64 @@ require 'linkeddata'
 
 class RdfController < ApplicationController
   DOI_BASE_URL = 'http://dx.doi.org/'
-  FOAF = RDF::Vocab::FOAF
+
   DC = RDF::Vocab::DC
-  DC11 = RDF::Vocab::DC11
+  FOAF = RDF::Vocab::FOAF
 
   def index
-
+    if params['path']
+      @doi = params['path']
+      @data = loadDC(@doi)
+    end
   end
 
-  def graph
-    graph = RDF::Graph.load(DOI_BASE_URL + params['path'], format: :ttl)
+  def getGraph(url)
+    begin
+      RDF::Graph.load(url, format: :ttl)
+    rescue
+      return
+    end
+  end
 
-    @data = {
-      url: DOI_BASE_URL + params['path'],
+  def getEmptyData
+    {
       date: nil,
-      title: nil,
-      publisher: nil
+      makers: [],
+      publisher: nil,
+      title: nil
     }
+  end
+
+  def getDoiUrl(doi)
+    puts 'mario'
+    puts 'mario'
+    puts 'mario'
+    puts 'mario'
+    puts 'mario'
+    puts 'mario'
+    puts 'mario'
+    puts 'mario'
+    puts 'mario'
+    puts 'mario'
+    puts 'mario'
+    puts 'mario'
+    puts 'mario'
+    puts 'mario'
+    puts DOI_BASE_URL
+    puts doi
+    DOI_BASE_URL + doi
+  end
+
+  def loadDC(doi)
+    graph = getGraph(getDoiUrl(doi))
+
+    if !graph
+      redirect_to "/"
+      return
+    end
+
+    data = getEmptyData()
+    data[:url] = getDoiUrl(doi)
 
     query = RDF::Query.new({
       data: {
@@ -31,8 +72,8 @@ class RdfController < ApplicationController
     })
 
     query.execute(graph) do |solution|
-      @data[:publisher] = solution.publisher
-      @data[:date] = solution.date
+      data[:publisher] = solution.publisher
+      data[:date] = solution.date
     end
 
     titleQuery = RDF::Query.new({
@@ -42,7 +83,20 @@ class RdfController < ApplicationController
     })
 
     titleQuery.execute(graph) do |solution|
-      @data[:title] = solution.title
+      data[:title] = solution.title
     end
+
+    makerQuery = RDF::Query.new({
+      person: {
+        RDF.type  => FOAF.Person,
+        FOAF.name => :name
+      }
+    })
+
+    makerQuery.execute(graph) do |solution|
+      data[:makers].push(solution.name)
+    end
+
+    data
   end
 end

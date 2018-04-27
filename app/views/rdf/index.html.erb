@@ -1,9 +1,26 @@
-<!-- <form action='/' method="GET"> -->
+<form action="/" method="GET">
+  <div>
+    <label>DOI: </label>
+    <input type="text" name="path" />
+  </div>
 
-<%= form_tag("rdf#graph", method: "get") do %>
-  <label>ID: </label>
-  <input type="text" />
+  <input type="submit" value="Search" />
+</form>
 
-  <input type="submit" value="Submit" />
+<% if @data %>
+  <div class="result">
+    <h1><%= link_to @data[:title], @data[:url], target: 'blank' %></h1>
+
+    <h2>Publisher: <span class="answer"><%= @data[:publisher] %></span></h2>
+    <h3>Last modified: <span class="answer"><%= @data[:date] %></span></h3>
+
+    <h2 class="list-title">Makers:</h2>
+    <ul>
+      <% @data[:makers].each do |publisher| %>
+        <li class="answer"><%= publisher %></li>
+      <% end %>
+    </ul>
+
+    <h3>DOI: <span class="answer"><%= @doi %></span></h3>
+  </div>
 <% end %>
-<!-- </form> -->
