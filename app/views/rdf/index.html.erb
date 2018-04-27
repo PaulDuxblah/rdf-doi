@@ -1,6 +1,9 @@
-<form action="/rdf/submit" method="GET">
-    <label>ID: </label>
-    <input type="text" name="id" />
+<!-- <form action='/' method="GET"> -->
 
-    <input type="submit" value="Submit" />
-</form>
+<%= form_tag("rdf#graph", method: "get") do %>
+  <label>ID: </label>
+  <input type="text" />
+
+  <input type="submit" value="Submit" />
+<% end %>
+<!-- </form> -->

@@ -1,43 +1,48 @@
 require 'rdf'
 require 'rdf/vocab'
 require 'rdf/ntriples'
+require 'linkeddata'
 
 class RdfController < ApplicationController
   DOI_BASE_URL = 'http://dx.doi.org/'
+  FOAF = RDF::Vocab::FOAF
+  DC = RDF::Vocab::DC
+  DC11 = RDF::Vocab::DC11
 
   def index
 
   end
 
-  def submit
-    begin
-      @graph = RDF::Graph.load(DOI_BASE_URL + params['id'], format: :ttl)
-      debugger
+  def graph
+    graph = RDF::Graph.load(DOI_BASE_URL + params['path'], format: :ttl)
 
-      solutions = RDF::Query.execute(@graph, {
-        person: {
-          RDF.type => FOAF.Person,
-        }
-      })
-      debugger
+    @data = {
+      url: DOI_BASE_URL + params['path'],
+      date: nil,
+      title: nil,
+      publisher: nil
+    }
 
-      # @graph = RDF::Graph.load("etc/doap.nt")
+    query = RDF::Query.new({
+      data: {
+        DC.publisher => :publisher,
+        DC.date => :date
+      }
+    })
 
-      puts @graph.query(predicate: RDF::Vocab::FOAF.name)
+    query.execute(graph) do |solution|
+      @data[:publisher] = solution.publisher
+      @data[:date] = solution.date
+    end
 
-      @statements = []
-      # RDF::Reader.open( DOI_BASE_URL + params['id'], format: RDF::Format.for(:ntriples) ) do |reader|
-      #   @reader = reader
-      #   # reader.each_statement do |statement|
-      #   #   @statements.push(statement)
-      #   # end
-      # end
-      # @graph = RDF::Graph.load("http://ruby-rdf.github.com/rdf/etc/doap.nt")
-      # @graph = RDF::Graph.load("http://dbpedia.org/resource/Elvis_Presley")
-      # @graph = RDF::Graph.load('http://njh.me/foaf.rdf')
-    rescue => ex
-      puts ex
-      redirect_to "/"
+    titleQuery = RDF::Query.new({
+      data: {
+        DC.title => :title
+      }
+    })
+
+    titleQuery.execute(graph) do |solution|
+      @data[:title] = solution.title
     end
   end
 end
